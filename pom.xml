@@ -13,6 +13,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -21,7 +22,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <plugins>
@@ -62,7 +62,7 @@
                                 <rule>
                                     <limits>
                                         <limit>
-                                            <counter>LINE</counter>
+                                            <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
                                             <minimum>100%</minimum>
                                         </limit>
