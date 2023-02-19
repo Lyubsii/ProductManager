@@ -134,7 +134,18 @@ public class ManagerTest {
         String name = "Гарри";
 
         Product[] expected = {};
-        Product[] actual = manager.searchBy(name);
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void noPoductsTest2() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+
+        Product[] expected = {};
+        Product[] actual = repo.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
