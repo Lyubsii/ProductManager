@@ -96,5 +96,56 @@ public class ManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void thereOneProductTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        Product product = new Product(3, "Бутылка", 50);
+
+        manager.add(product);
+
+        Product[] expected = {product};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void thereSomeProductsTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        Product product = new Product(3, "Бутылка", 50);
+        Book book = new Book(1, "Гарри Поттер", 100, "Джоан Роулинг");
+
+        manager.add(product);
+        manager.add(book);
+
+        Product[] expected = {product, book};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void noPoductsTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+
+        String name = "Гарри";
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy(name);
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
+
+
+
+
+
+
+
 
 }
