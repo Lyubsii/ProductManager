@@ -44,6 +44,46 @@ public class ManagerTest {
     }
 
     @Test
+    public void shouldFindPhoneNameTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        Book book1 = new Book(1, "Гарри Поттер", 100, "Джоан Роулинг");
+        Book book2 = new Book(2, "Гарри Поттер", 100, "Джоан Роулинг1");
+        Book book3 = new Book(3, "Лавр", 1000, "Водолазкин");
+        Smartphone smartphone = new Smartphone(2, "Редми", 20000, "Производитель");
+        Product product = new Product(3, "Бутылка", 50);
+
+        manager.add(smartphone);
+        manager.add(book2);
+        manager.add(book3);
+
+        Product[] expected = {smartphone};
+        Product[] actual = manager.searchBy("Редми");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldNotFindAuthorTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+        Book book1 = new Book(1, "Гарри Поттер", 100, "Джоан Роулинг");
+        Book book2 = new Book(2, "Гарри Поттер", 100, "Джоан Роулинг1");
+        Book book3 = new Book(3, "Лавр", 1000, "Водолазкин");
+        Smartphone smartphone = new Smartphone(2, "Редми", 20000, "Производитель");
+        Product product = new Product(3, "Бутылка", 50);
+
+        manager.add(smartphone);
+        manager.add(book2);
+        manager.add(book3);
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Джоан Роулинг");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void addTest() {
         Repository repo = new Repository();
         Manager manager = new Manager(repo);
@@ -127,7 +167,31 @@ public class ManagerTest {
     }
 
     @Test
-    public void noPoductsTest() {
+    public void thereSomeProductsTest2() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+
+        Book book1 = new Book(1, "Гарри Поттер", 100, "Джоан Роулинг");
+        Book book2 = new Book(2, "Гарри Поттер", 100, "Джоан Роулинг1");
+        Book book3 = new Book(3, "Лавр", 1000, "Водолазкин");
+        Smartphone smartphone = new Smartphone(2, "Редми", 20000, "Производитель");
+        Product product = new Product(3, "Бутылка", 50);
+
+        manager.searchBy("book1");
+        manager.searchBy("book2");
+        manager.searchBy("book3");
+        manager.searchBy("smartphone");
+        manager.searchBy("product");
+
+
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Лавр, Гарри Поттер, Бутылка");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void noProductsTest() {
         Repository repo = new Repository();
         Manager manager = new Manager(repo);
 
@@ -140,7 +204,7 @@ public class ManagerTest {
     }
 
     @Test
-    public void noPoductsTest2() {
+    public void noProductsTest2() {
         Repository repo = new Repository();
         Manager manager = new Manager(repo);
 
@@ -150,13 +214,19 @@ public class ManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void notFindNullTest() {
+        Repository repo = new Repository();
+        Manager manager = new Manager(repo);
+
+        Product product = new Product(3, "Бутылка", 50);
+        Book book = new Book(1, "Гарри Поттер", 100, "Джоан Роулинг");
 
 
+        Product[] expected = {};
+        Product[] actual = manager.searchBy(null);
 
-
-
-
-
-
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
 }
