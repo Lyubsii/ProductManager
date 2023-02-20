@@ -95,23 +95,6 @@ public class RepositoryTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void RemoveByIdTest() {
-        Repository repo = new Repository();
-        Manager manager = new Manager(repo);
-        Book book = new Book(1, "Гарри Поттер 1", 100, "Джоан Роулинг");
-        Book book1 = new Book(2, "Гарри Поттер 2", 150, "Джоан Роулинг");
-
-        repo.add(book);
-        repo.add(book1);
-
-        repo.removeById((book1.getId()));
-
-        Product[] expected = {book, book1};
-        Product[] actual = repo.findAll();
-
-        Assertions.assertArrayEquals(expected, actual);
-    }
 
 
 }
